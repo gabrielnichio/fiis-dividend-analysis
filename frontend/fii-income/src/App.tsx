@@ -73,6 +73,7 @@ function App() {
           <p>Total Investido: R$ {result["total_invested"]}</p>
           <p>Dividendos Gerados: R$ {result["total_income"]}</p>
           <p>Quantidade de FIIs Comprados: {result["total_num_papers"]}</p>
+          <p>Total nos dias de hoje: R$ {result["actual_amount"]}</p>
         </div>
       )}
     </div>

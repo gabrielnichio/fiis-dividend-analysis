@@ -36,7 +36,8 @@ async def calculate_income(item: Item):
     return {
         "total_income": data["total_income"], 
         "total_invested": data["total_invested"], 
-        "total_num_papers": data["total_num_papers"]
+        "total_num_papers": data["total_num_papers"],
+        "actual_amount": data["actual_amount"]
     }
     
 @app.get("/tickers/")
