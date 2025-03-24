@@ -1,10 +1,9 @@
 import pandas as pd
 import numpy as np
-from decimal import Decimal
 
 
 def prepare_data(fii_tracked, initial_application, date, monthly_reinvestment):
-    df = pd.read_csv("data/fii-formated.csv")
+    df = pd.read_csv("../data/fii-formated.csv")
 
     df["data_pagamento"] = pd.to_datetime(df["data_pagamento"])
 
@@ -37,6 +36,7 @@ def prepare_data(fii_tracked, initial_application, date, monthly_reinvestment):
 
     total_invested = initial_application
     total_dividends_period = 0
+    total_num_papers = 0
 
     for i in range(len(fii_df)):
         line = fii_df.iloc[i]
@@ -48,22 +48,16 @@ def prepare_data(fii_tracked, initial_application, date, monthly_reinvestment):
 
         if acc / line["cotacao"] > 0:
             num_papers = np.floor(acc / line["cotacao"])
+            total_num_papers += num_papers
             total_invested += num_papers * line["cotacao"]
             num_cotas += num_papers
 
             acc = np.round(acc % line["cotacao"], 2)
         else:
             acc += month_income
-
-    # print(
-    # f"Total de dividendos ganhos no período (até data do ultimo pagamento): {np.round(total_dividends_period, 2)}"
-    # )
-
+            
     return {
         "total_income": np.round(total_dividends_period, 2),
         "total_invested": np.round(total_invested, 2),
-        "rest": rest,
-        "initial_application": initial_application,
-        "cotacao_starting_date": starting_date["cotacao"],
-        "division": division
+        "total_num_papers": total_num_papers,
     }
