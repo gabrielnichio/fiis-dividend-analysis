@@ -3,15 +3,17 @@ from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
 from data_preparation import prepare_data
-from tickers import tickers
+from utils import startEndDates, tickers
 
 
-class Item(BaseModel):
+class Infos(BaseModel):
     ticker: str
     initial_application: float
     application_date: str
     monthly_application: float
 
+class FiiSelected(BaseModel):
+    ticker: str
 
 app = FastAPI()
 
@@ -25,12 +27,12 @@ app.add_middleware(
 
 
 @app.post("/calculate/")
-async def calculate_income(item: Item):
+async def calculate_income(front_infos: Infos):
     data = prepare_data(
-        item.ticker,
-        item.initial_application,
-        item.application_date,
-        item.monthly_application,
+        front_infos.ticker,
+        front_infos.initial_application,
+        front_infos.application_date,
+        front_infos.monthly_application,
     )
 
     return {
@@ -47,3 +49,13 @@ async def get_tickers():
     return {
         "tickers": data
     }
+
+@app.post("/get-dates/")
+async def get_start_end_dates(filter_infos: FiiSelected):
+    data = startEndDates(filter_infos.ticker)
+
+    return {
+        "start_date": data["start_date"],
+        "end_date": data["end_date"]
+    }
+

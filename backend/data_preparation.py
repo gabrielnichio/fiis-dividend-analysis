@@ -60,5 +60,5 @@ def prepare_data(fii_tracked, initial_application, date, monthly_reinvestment):
         "total_income": np.round(total_dividends_period, 2),
         "total_invested": np.round(total_invested, 2),
         "total_num_papers": total_num_papers,
-        "actual_amount": np.round((total_num_papers+num_cotas)*fii_df.iloc[-1]["cotacao"], 2)
+        "actual_amount": np.round((total_num_papers+num_cotas)*fii_df.iloc[-1]["cotacao"], 2),
     }
