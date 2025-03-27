@@ -19,3 +19,4 @@ Abra o terminal e execute:
 ```sh
 git clone https://github.com/seu-usuario/seu-repositorio.git
 cd seu-repositorio
+```
