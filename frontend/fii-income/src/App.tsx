@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Button, Input, Select } from './components/ui';
 import { calculateInvestment, getDates, getFiiList } from './services/api';
 import { BodyModel } from './interfaces/request-model';
+import { formatCurrencyBRL } from './tools/currency-parsers';
 
 function App() {
   const [fii, setFii] = useState("");
@@ -85,19 +86,19 @@ function App() {
       {result && (
         <div className="result-container">
           <div className="result-box">
-            <p>Total Investido: R$ {result["total_invested"]}</p>
+            <p>Total Investido: R$ {formatCurrencyBRL(result["total_invested"])}</p>
           </div>
           <div className="result-box">
-            <p>Dividendos Gerados: R$ {result["total_income"]}</p>
+            <p>Dividendos Gerados: R$ {formatCurrencyBRL(result["total_income"])}</p>
           </div>
           <div className="result-box">
-            <p>Quantidade de FIIs Comprados: {result["total_num_papers"]}</p>
+            <p>Quantidade de FIIs Comprados: {formatCurrencyBRL(result["total_num_papers"])}</p>
           </div>
           <div className="result-box">
-            <p>Total nos dias de hoje: R$ {result["actual_amount"]}</p>
+            <p>Total nos dias de hoje: R$ {formatCurrencyBRL(result["actual_amount"])}</p>
           </div>
           <div className="result-box">
-            <p>Dividendos Projetados por Mês: R$ {result["projected_monthly_income"]}</p>
+            <p>Dividendos Projetados por Mês: R$ {formatCurrencyBRL(result["projected_monthly_income"])}</p>
           </div>
         </div>
       )}
