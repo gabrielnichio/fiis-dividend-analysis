@@ -12,7 +12,7 @@ Os dados retornados são:
 - Total nos dias de hoje: montante de dinheiro investido de acordo com a quantidade de cotas e sua valorização ao longo do tempo.
 - Dividendos projetados por mês: renda passiva projetada para os próximos meses levando em consideração o dividendo da última data de pagamento.
 
-![image](https://github.com/user-attachments/assets/8aea9909-bee6-4241-8792-9d84717b537a)
+  ![image](https://github.com/user-attachments/assets/8aea9909-bee6-4241-8792-9d84717b537a)
 
 ---
 
@@ -33,5 +33,5 @@ Antes de começar, certifique-se de ter instalado:
 1. Clone o repositório na sua máquina.
 2. Crie um ambiente virtual python.
 3. Ative o ambiente virtual e instale as dependências em requirements.txt.
-4. Para rodar o backend navegue até a pasta ```sh backend``` e rode o comando ```sh fastapi dev api.py```
-5. Para rodar o frontend navegue até a pasta ```sh frontend/fii-income``` e rode os comandos ```sh npm install``` e ```sh npm start```
+4. Para rodar o backend navegue até a pasta ```backend``` e rode o comando ```fastapi dev api.py```.
+5. Para rodar o frontend navegue até a pasta ```frontend/fii-income``` e rode os comandos ```npm install``` e ```npm start```.
