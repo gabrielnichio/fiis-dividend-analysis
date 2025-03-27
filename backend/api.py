@@ -39,7 +39,8 @@ async def calculate_income(front_infos: Infos):
         "total_income": data["total_income"], 
         "total_invested": data["total_invested"], 
         "total_num_papers": data["total_num_papers"],
-        "actual_amount": data["actual_amount"]
+        "actual_amount": data["actual_amount"],
+        "projected_monthly_income": data["projected_monthly_income"]
     }
     
 @app.get("/tickers/")

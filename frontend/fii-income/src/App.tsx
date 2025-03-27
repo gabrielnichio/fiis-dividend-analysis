@@ -4,13 +4,8 @@ import moment from 'moment';
 
 import { useState, useEffect } from "react";
 import { Button, Input, Select } from './components/ui';
-
-interface BodyModel{
-  ticker: string
-  initial_application: number
-  application_date: string
-  monthly_application: number
-}
+import { calculateInvestment, getDates, getFiiList } from './services/api';
+import { BodyModel } from './interfaces/request-model';
 
 function App() {
   const [fii, setFii] = useState("");
@@ -18,19 +13,15 @@ function App() {
   const [initialInvestment, setInitialInvestment] = useState(0);
   const [monthlyInvestment, setMonthlyInvestment] = useState(0);
   const [result, setResult] = useState(null);
-  const [fiiOptions, setFiiOptions] = useState([]);
+  const [fiiOptions, setFiiOptions] = useState([""]);
   const [startDate, setStartDate] = useState("01/01/2020");
   const [endDate, setEndDate] = useState("");
 
   useEffect(() => {
     const fetchFiiList = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/tickers", {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        });
-        const data = await response.json();
-        setFiiOptions(data["tickers"]);
+        const data = await getFiiList();
+        setFiiOptions(data["tickers"] ? data["tickers"] : []);
       } catch (error) {
         console.error("Erro trying to fetch FIIs:", error);
       }
@@ -47,23 +38,13 @@ function App() {
       monthly_application: monthlyInvestment,
     };
 
-    const response = await fetch("http://127.0.0.1:8000/calculate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(bodyRequest),
-    });
-    const data = await response.json();
+    const data = await calculateInvestment(bodyRequest);
     setResult(data);
   };
 
   const getStartEndDates = async (ticker: string) => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/get-dates", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ticker }),
-      });
-      const data = await response.json();
+      const data = await getDates(ticker);
       setStartDate(data["start_date"]);
       setEndDate(data["end_date"]);
     } catch (error) {
@@ -78,6 +59,7 @@ function App() {
         <Select value={fii} onChange={(e) => {
           setFii(e.target.value)
           getStartEndDates(e.target.value)
+          setResult(null)
         }}>
           <option value="">Selecione um FII</option>
           {fiiOptions.map((fiiName) => (
@@ -113,6 +95,9 @@ function App() {
           </div>
           <div className="result-box">
             <p>Total nos dias de hoje: R$ {result["actual_amount"]}</p>
+          </div>
+          <div className="result-box">
+            <p>Dividendos Projetados por Mês: R$ {result["projected_monthly_income"]}</p>
           </div>
         </div>
       )}
