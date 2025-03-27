@@ -26,7 +26,7 @@ def prepare_data(fii_tracked, initial_application, date, monthly_reinvestment):
 
     acc = rest
 
-    total_invested = total_num_papers*starting_date["cotacao"]
+    total_invested = initial_application
     total_dividends_period = 0
     
 

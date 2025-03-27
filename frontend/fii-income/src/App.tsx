@@ -92,7 +92,7 @@ function App() {
             <p>Dividendos Gerados: R$ {formatCurrencyBRL(result["total_income"])}</p>
           </div>
           <div className="result-box">
-            <p>Quantidade de FIIs Comprados: {formatCurrencyBRL(result["total_num_papers"])}</p>
+            <p>Quantidade de FIIs Comprados: {result["total_num_papers"]}</p>
           </div>
           <div className="result-box">
             <p>Total nos dias de hoje: R$ {formatCurrencyBRL(result["actual_amount"])}</p>
