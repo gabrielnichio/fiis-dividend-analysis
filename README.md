@@ -17,6 +17,6 @@ Antes de começar, certifique-se de ter instalado:
 Abra o terminal e execute:
 
 ```sh
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
+git clone https://github.com/gabrielnichio/fiis-dividend-analysis.git
+cd fiis-dividend-analysis
 ```
