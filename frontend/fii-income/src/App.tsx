@@ -86,19 +86,19 @@ function App() {
       {result && (
         <div className="result-container">
           <div className="result-box">
-            <p>Total Investido: R$ {formatCurrencyBRL(result["total_invested"])}</p>
+            <p>Total Investido: {formatCurrencyBRL(result["total_invested"])}</p>
           </div>
           <div className="result-box">
-            <p>Dividendos Gerados: R$ {formatCurrencyBRL(result["total_income"])}</p>
+            <p>Dividendos Gerados: {formatCurrencyBRL(result["total_income"])}</p>
           </div>
           <div className="result-box">
             <p>Quantidade de FIIs Comprados: {result["total_num_papers"]}</p>
           </div>
           <div className="result-box">
-            <p>Total nos dias de hoje: R$ {formatCurrencyBRL(result["actual_amount"])}</p>
+            <p>Total nos dias de hoje: {formatCurrencyBRL(result["actual_amount"])}</p>
           </div>
           <div className="result-box">
-            <p>Dividendos Projetados por Mês: R$ {formatCurrencyBRL(result["projected_monthly_income"])}</p>
+            <p>Dividendos Projetados por Mês: {formatCurrencyBRL(result["projected_monthly_income"])}</p>
           </div>
         </div>
       )}
